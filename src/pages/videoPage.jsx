@@ -54,13 +54,11 @@ const VideoSection = () =>{
 }
 
 const CommentSection = () =>{
-
     const dummyComment = {
         username : 'ovisannn',
         comment : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         date : '2023-07-25T02:51:49.983+00:00'
     }
-
     return(
         <div className="flex flex-col bg-[#1c1d20] h-screen">
             <div className="h-5/6 bg-[#1c1d20] overflow-y-auto scrollbar-hide transition-all ease-in mt-9">{
