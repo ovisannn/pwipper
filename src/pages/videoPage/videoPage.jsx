@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
-import Header from '../components/header'
-import CommentCard from '../components/commentCard';
+import Header from '../../components/header'
+import CommentCard from '../../components/commentCard';
 import { BiSolidSend } from "react-icons/bi";
-import ProductCard from '../components/productCard';
+import ProductCard from '../../components/productCard';
 
 const dummyMap = [1,2,3,4,5,6,7,8,9, 10]
 

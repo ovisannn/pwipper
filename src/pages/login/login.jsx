@@ -1,32 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/header";
+import Header from "../../components/header";
+import axios from "axios";
+import api from '../../handler/apiUrl.js'
+import { useNavigate } from 'react-router-dom'
+import Cookies from "js-cookie";
 
 
 const LoginForm = () => {
+    const navigate = useNavigate()
+
     const [getLogin, setLogin] = useState({
-        email: '',
+        username: '',
         password: ''
     })
 
-    const setEmail = (mail) =>{
+    const setUsername = (username) =>{
         const pw = getLogin.password
         setLogin({
-            email : mail,
+            username : username,
             password : pw
         })
     }
 
     const setPassword = (pw)=>{
-        const mail = getLogin.email
+        const username = getLogin.username
         setLogin({
-            email : mail,
+            username : username,
             password : pw
         })
     }
 
-    const onLogin= () =>{
-        localStorage.setItem('loginInformation', JSON.stringify(getLogin))
+    const onLogin= (e) =>{
+        e.preventDefault()
+        axios.post(api.PostLogin(), {
+            username : getLogin.username,
+            password : getLogin.password
+        }).then(res=>{
+            // console.log(res.data.data)
+            Cookies.set('username', res.data.data)
+            navigate('/')
+        }).catch(er=>{
+            navigate('/invalidCredential')
+        })
     }
 
     return (
@@ -35,13 +51,13 @@ const LoginForm = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="/tes" onSubmit={()=>{onLogin()}}>
+            <form className="space-y-4 md:space-y-6" action="/tes" onSubmit={(e)=>{onLogin(e)}}>
 
                 <div>
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Your email
+                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Username
                     </label>
-                    <input type="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@mail.com" value={getLogin.email} onChange={(e)=>{setEmail(e.target.value)}} required />
+                    <input type="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" value={getLogin.email} onChange={(e)=>{setUsername(e.target.value)}} required />
                 </div>
 
                 <div>

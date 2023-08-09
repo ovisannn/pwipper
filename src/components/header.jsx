@@ -1,9 +1,12 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { BiSearch, BiLogOut, BiUser } from "react-icons/bi"
 import { Menu, Transition } from '@headlessui/react'
+import Cookies from 'js-cookie'
+import axios from 'axios'
+import apiUrl from '../handler/apiUrl.js'
 // import { Navigate } from 'react-router-dom'
 
 const NotLogin = () =>{
@@ -21,18 +24,19 @@ const NotLogin = () =>{
   )
 }
 
-const OnLogin = () =>{
+const OnLogin = ( { setFunc, userData } ) =>{
 // eslint-disable-next-line
   const onLogout = () =>{
-    localStorage.removeItem('token')
-    console.log('logut success')
+    Cookies.remove('username')
+    setFunc(false)
   }
 
   return (
     <Menu as="div" className="relative inline-block text-left">
-    <div>
+    <div className='flex flex-row'>
       <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-      <img class="w-10 h-10 rounded" src="https://fitgirl-repacks.site/wp-content/uploads/2016/08/icon.jpg" alt="Default avatar"/>
+      <img className="w-10 h-10 rounded" src={userData.profilePpict} alt="Default avatar"/>
+      <div className='m-2 font-bold'>{userData.username}</div>
       </Menu.Button>
     </div>
     <Transition as={Fragment}enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95"
@@ -70,6 +74,21 @@ const OnLogin = () =>{
 }
 
 const header = () => {
+  const [isLogin, setIsLogin] = useState(false)
+  const [getUser, setUser] = useState({})
+
+  useEffect(()=>{
+    const username = Cookies.get('username')
+    if(username !== undefined){
+      axios.get(apiUrl.GetUserPublicInformation(username)).then(
+        res =>{
+          setUser(res.data.data.result)
+          setIsLogin(true)
+        }
+      )
+    }
+  },[isLogin])
+
   return (
     <div className='sticky top-0 z-10 flex flex-row h-auto bg-[#26282D] justify-between text-white py-3 px-6'>
         <div className='font-bold pt-2'>
@@ -84,7 +103,7 @@ const header = () => {
           {/* if login change null into loged in component */}
         <div>
           {/* <OnLogin /> */}
-          {!localStorage.getItem('token')? (<NotLogin/>) : <OnLogin />}
+          {!isLogin? (<NotLogin/>) : <OnLogin setFunc={setIsLogin} userData={getUser} />}
         </div>
         </div>
     </div>

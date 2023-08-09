@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../components/header'
-import VideoCard from '../components/videoCard'
-import { videosDummyData } from '../helpers/dummyData'
+import Header from '../../components/header'
+import VideoCard from '../../components/videoCard'
+import { videosDummyData } from '../../helpers/dummyData'
 
 const fetchVideos = () =>{
     return videosDummyData

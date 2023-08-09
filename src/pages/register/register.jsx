@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/header";
+import Header from "../../components/header";
 import { useEffect } from "react";
 
 
@@ -30,11 +30,8 @@ const RegisterForm = () => {
       }
     })()
   },[password2, password])
-  
 
-  // const onLogin= () =>{
-  //     localStorage.setItem('loginInformation', JSON.stringify(getLogin))
-  // }
+  
     const onRegister = (e) =>{
       e.preventDefault()
     }
