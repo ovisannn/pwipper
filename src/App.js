@@ -9,6 +9,7 @@ import InvalidCredential from './pages/login/invalidCredential';
 import SearchPage from './pages/search/search';
 import RegisterSuccess from './pages/register/registerSuccess'
 import EmergencyCommentHandling from './pages/videoPage/emergencyCommentHandling';
+import NotFound from './pages/notFound404/notFound';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path=':searchParam' element={<SearchPage/>}/>
           </Route>
           <Route path='/insertComment' element={<EmergencyCommentHandling/>} />
+          <Route path='*' element={<NotFound/>} />
         </Routes>
       </Router>
   );
