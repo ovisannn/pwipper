@@ -35,9 +35,13 @@ const SearchPage = () => {
   const [getSearch, setSearch] = useState('')
   const [getSearchData, setSearchData] = useState([])
   const [showData, setShowData] = useState([])
-
+  // console.log(getSearch)
   const onSearch = async() =>{
-    await axios.get(apiUrl.SearchVideo(getSearch? getSearch : '%20')).then(res=>{
+    if(getSearch === ''){
+      alert("search parameter can't be empty!")
+      return
+    }
+    await axios.get(apiUrl.SearchVideo(getSearch)).then(res=>{
       setSearchData(res.data.data.tumbnails)
     })
   }

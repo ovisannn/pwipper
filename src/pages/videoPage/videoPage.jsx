@@ -67,14 +67,13 @@ const CommentSection = ( { comments, videoId } ) =>{
         comment : comment,
         token : `${Cookies.get('token')}`
       }
-      ).then(
+      ).then().finally(
         navigate(0)
       )
     }else{
       navigate('/invalidCredential')
     }
   }
-
 
     return(
         <div className="flex flex-col bg-[#1c1d20] h-screen">

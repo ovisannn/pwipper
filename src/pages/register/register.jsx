@@ -43,7 +43,7 @@ const RegisterForm = () => {
   
     const onRegister = async (e) =>{
       e.preventDefault()
-      if(usernameError !== '' || emailError !== ''){
+      if(usernameError !== '' || emailError !== '' || isUnameCheck === false || isEmailCheck === false){
         alert('please check username or email first!')
         return
       }

@@ -1,4 +1,5 @@
-const apiDomain = "http://localhost:3000"
+// const apiDomain = "http://localhost:3000"
+const apiDomain = "https://uptight-ant-gabardine.cyclic.cloud"
 
 const PostLogin = () => {
     return `${apiDomain}/user/login`
