@@ -78,16 +78,18 @@ const header = () => {
   const [getUser, setUser] = useState({})
 
   useEffect(()=>{
-    const username = Cookies.get('username')
-    if(username !== undefined){
-      axios.get(apiUrl.GetUserPublicInformation(username)).then(
-        res =>{
-          setUser(res.data.data.result)
-          setIsLogin(true)
-        }
-      )
-    }
-  },[isLogin])
+    (async()=>{
+      const username = Cookies.get('username')
+      if(username !== undefined){
+        await axios.get(apiUrl.GetUserPublicInformation(username)).then(
+          res =>{
+            setUser(res.data.data.result)
+            setIsLogin(true)
+          }
+        )
+      }
+    })()
+  },[])
 
   return (
     <div className='sticky top-0 z-10 flex flex-row h-auto bg-[#26282D] justify-between text-white py-3 px-6'>

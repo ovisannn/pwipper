@@ -22,7 +22,7 @@ const commentCard = ( {comment} ) => {
         </div>
       </div>
       <div className='my-1'>
-        <p>{comment.comment}</p>
+        <p className='my-2'>{comment.comment}</p>
       </div>
     </div>
   )

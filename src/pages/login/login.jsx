@@ -31,14 +31,15 @@ const LoginForm = () => {
         })
     }
 
-    const onLogin= (e) =>{
+    const onLogin= async (e) =>{
         e.preventDefault()
         axios.post(api.PostLogin(), {
             username : getLogin.username,
             password : getLogin.password
         }).then(res=>{
             // console.log(res.data.data)
-            Cookies.set('username', res.data.data)
+            Cookies.set('username', res.data.data.username)
+            Cookies.set('token', res.data.data.token)
             navigate('/')
         }).catch(er=>{
             navigate('/invalidCredential')
