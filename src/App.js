@@ -8,6 +8,7 @@ import User from './pages/user/user';
 import InvalidCredential from './pages/login/invalidCredential';
 import SearchPage from './pages/search/search';
 import RegisterSuccess from './pages/register/registerSuccess'
+import EmergencyCommentHandling from './pages/videoPage/emergencyCommentHandling';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="search" element={<SearchPage/>}>
             <Route path=':searchParam' element={<SearchPage/>}/>
           </Route>
+          <Route path='/insertComment' element={<EmergencyCommentHandling/>} />
         </Routes>
       </Router>
   );

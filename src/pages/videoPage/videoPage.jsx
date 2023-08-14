@@ -68,7 +68,8 @@ const CommentSection = ( { comments, videoId } ) =>{
         token : `${Cookies.get('token')}`
       }
       ).then().finally(
-        navigate(0)
+        navigate('/insertComment')
+        // window.location.reload(false)
       )
     }else{
       navigate('/invalidCredential')
