@@ -1,24 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BrowseVideo from './pages/browseVideo/browseVideo';
+import VideoPage from './pages/videoPage/videoPage';
+import Login from './pages/login/login';
+import Register from './pages/register/register';
+import User from './pages/user/user';
+import InvalidCredential from './pages/login/invalidCredential';
+import SearchPage from './pages/search/search';
+import RegisterSuccess from './pages/register/registerSuccess'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <Routes>
+          <Route path ="" element={<BrowseVideo/>} />
+          <Route path ="/login" element={<Login/>} />
+          <Route path ="/register" element={<Register/>} />
+          <Route path ="/registerSuccess" element={<RegisterSuccess/>} />
+          <Route path="/invalidCredential" element={<InvalidCredential/>} />
+          <Route path="video">
+            <Route path=':videoId' element={<VideoPage/>}/>
+          </Route>
+          <Route path="user">
+            <Route path=':username' element={<User/>}/>
+          </Route>
+          <Route path="search" element={<SearchPage/>}>
+            <Route path=':searchParam' element={<SearchPage/>}/>
+          </Route>
+        </Routes>
+      </Router>
   );
 }
 
