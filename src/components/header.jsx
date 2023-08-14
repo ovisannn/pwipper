@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BiSearch, BiLogOut, BiUser } from "react-icons/bi"
 import { Menu, Transition } from '@headlessui/react'
 import Cookies from 'js-cookie'
@@ -25,10 +25,12 @@ const NotLogin = () =>{
 }
 
 const OnLogin = ( { setFunc, userData } ) =>{
+  const navigate = useNavigate()
 // eslint-disable-next-line
   const onLogout = () =>{
     Cookies.remove('username')
     setFunc(false)
+    navigate('/login')
   }
 
   return (
@@ -58,12 +60,12 @@ const OnLogin = ( { setFunc, userData } ) =>{
         <div className="px-1 py-1">
           <Menu.Item>
             {({ active }) => (
-              <Link onClickCapture={onLogout} to='/login' className={`${active ? 'bg-[#ac2e2e] text-white' : 'text-[#ac2e2e]'} group flex flex-row w-full items-center rounded-md px-2 py-2 text-sm`}>
+              <button onClickCapture={onLogout} className={`${active ? 'bg-[#ac2e2e] text-white' : 'text-[#ac2e2e]'} group flex flex-row w-full items-center rounded-md px-2 py-2 text-sm`}>
                   <div className='mx-2'>
                     <BiLogOut size={20} />
                   </div>
                 Logout
-              </Link>
+              </button>
             )}
           </Menu.Item>
         </div>
